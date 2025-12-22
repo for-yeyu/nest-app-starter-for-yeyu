@@ -89,6 +89,8 @@ export default [
       'node_modules',
       'eslint.config.mjs',
       'prettier.config.mjs',
+      'commitlint.config.cjs',
+      'lint-staged.config.js',
       // * The Refer directory may contain other projects, intended for AI usage.
       'refer',
     ],

@@ -12,8 +12,12 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "typecheck": "tsc",
     "lint": "eslint --max-warnings 0 .",
-    "lint:fix": "eslint --max-warnings 0 --fix ."
+    "lint:fix": "eslint --max-warnings 0 --fix .",
+    "prepare": "husky",
+    "commit": "git-cz",
+    "qwer": "git-cz"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -23,6 +27,8 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@nestjs/cli": "^11.0.0",
@@ -31,12 +37,16 @@
     "@swc/core": "^1.10.7",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.7",
+    "commitizen": "^4.3.1",
+    "cz-git": "^1.12.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-check-file": "^3.3.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.2.2",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.4.2",
     "source-map-support": "^0.5.21",
     "ts-loader": "^9.5.2",
@@ -44,5 +54,10 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   }
 }
