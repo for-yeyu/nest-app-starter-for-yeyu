@@ -66,7 +66,7 @@ module.exports = {
       },
       {
         value: 'refactor',
-        name: 'refactor: 🥹   A code change that neither fixes a bug nor adds a feature',
+        name: 'refactor: 🥹  A code change that neither fixes a bug nor adds a feature',
         emoji: '🥹',
       },
       {
@@ -81,7 +81,7 @@ module.exports = {
       },
       {
         value: 'build',
-        name: 'build:    📦️   Changes that affect the build system or external dependencies',
+        name: 'build:    📦️  Changes that affect the build system or external dependencies',
         emoji: '📦️',
       },
       {
