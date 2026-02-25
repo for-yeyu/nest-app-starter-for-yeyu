@@ -12,7 +12,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api')
 
   const configService = app.get(ConfigService)
-  const PORT = configService.get<number>('SEVER_PORT', 4040)
+  const PORT = configService.get<number>('SERVER_PORT', 4040)
 
   await app.listen(PORT, () => {
     // biome-ignore lint/suspicious/noConsole: <ingore>
