@@ -150,7 +150,10 @@
             "noUnreachable": "off",
             "noUnreachableSuper": "off"
           },
-          "style": { "useConst": "error" },
+          "style": {
+            "useConst": "error",
+            "useImportType": "off"
+          },
           "suspicious": {
             "noClassAssign": "off",
             "noDuplicateClassMembers": "off",
