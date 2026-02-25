@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
+import { EnvService } from './config/env/env.service'
 
 @Injectable()
 export class AppService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly envService: EnvService) {}
 
   getHello(): string {
-    const appName = this.configService.get('APP_NAME')
+    const appName = this.envService.appName
 
     return `
       <h1
