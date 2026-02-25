@@ -122,6 +122,9 @@
     }
   },
   "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
     "formatter": {
       "quoteProperties": "asNeeded",
       "trailingCommas": "all",

@@ -4,6 +4,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { EnvService } from './config/env/env.service'
 import { validateEnv } from './config/env/env.validation'
+import { CatModule } from './module/cat/cat.module'
 
 const nodeEnv = process.env.NodeEnv ?? 'development'
 
@@ -16,6 +17,7 @@ const nodeEnv = process.env.NodeEnv ?? 'development'
       envFilePath: [`.env.${nodeEnv}.local`, `.env.${nodeEnv}`, '.env.local', '.env'],
       validate: validateEnv,
     }),
+    CatModule,
   ],
   controllers: [AppController],
   providers: [AppService, EnvService],

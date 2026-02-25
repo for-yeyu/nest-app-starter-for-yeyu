@@ -1,6 +1,7 @@
 import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter } from '@nestjs/platform-fastify'
+import { ZodValidationPipe } from 'nestjs-zod'
 import { AppModule } from './app.module'
 import { EnvService } from './config/env/env.service'
 
@@ -10,6 +11,7 @@ async function bootstrap() {
   })
 
   app.setGlobalPrefix('api')
+  app.useGlobalPipes(new ZodValidationPipe())
 
   const envService = app.get(EnvService)
   const port = envService.serverPort
