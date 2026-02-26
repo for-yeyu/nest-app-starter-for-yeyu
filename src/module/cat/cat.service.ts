@@ -2,11 +2,14 @@ import type { CreateCatDto } from './dto/create-cat.dto'
 import type { UpdateCatDto } from './dto/update-cat.dto'
 import type { Cat } from './entity/cat.entity'
 import { Injectable, NotFoundException } from '@nestjs/common'
+import { EnvService } from 'src/config/env/env.service'
 
 @Injectable()
 export class CatService {
   private cats: Cat[] = []
   private nextId = 1
+
+  constructor(private readonly envService: EnvService) {}
 
   create(createCatDto: CreateCatDto): Cat {
     const cat: Cat = {
@@ -19,6 +22,7 @@ export class CatService {
   }
 
   findAll(): Cat[] {
+    console.log(this.envService.appName)
     return this.cats
   }
 
