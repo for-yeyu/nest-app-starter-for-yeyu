@@ -42,7 +42,7 @@
     "commitizen": "^4.3.1",
     "cz-git": "^1.12.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.3.1",
     "source-map-support": "^0.5.21",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
