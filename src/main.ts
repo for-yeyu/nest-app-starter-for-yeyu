@@ -1,6 +1,7 @@
 import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter } from '@nestjs/platform-fastify'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { ZodValidationPipe } from 'nestjs-zod'
 import { AppModule } from './app.module'
 import { EnvService } from './config/env/env.service'
@@ -17,9 +18,20 @@ async function bootstrap() {
   const port = envService.serverPort
   const nodeEnv = envService.nodeEnv
 
+  const config = new DocumentBuilder()
+    .setTitle('Cats example')
+    .setDescription('The cats API description')
+    .setVersion('1.0')
+    .addTag('cats')
+    .build()
+  const documentFactory = () => SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('docs', app, documentFactory)
+
   await app.listen(port, () => {
     // biome-ignore lint/suspicious/noConsole: <ignore>
     console.log(`🥳 Nest app is running on http://localhost:${port}/api`)
+    // biome-ignore lint/suspicious/noConsole: <ignore>
+    console.log(`🥳 Swagger is running on http://localhost:${port}/docs`)
     // biome-ignore lint/suspicious/noConsole: <ignore>
     console.log(`🤓 Current env is ${nodeEnv}`)
   })

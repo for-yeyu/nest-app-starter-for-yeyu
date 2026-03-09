@@ -22,6 +22,7 @@ export class CatService {
   }
 
   findAll(): Cat[] {
+    // biome-ignore lint/suspicious/noConsole: <ignore>
     console.log(this.envService.appName)
     return this.cats
   }
