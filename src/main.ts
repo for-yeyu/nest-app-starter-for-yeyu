@@ -22,16 +22,21 @@ async function bootstrap() {
     .setTitle('Cats example')
     .setDescription('The cats API description')
     .setVersion('1.0')
+    .addServer(`http://localhost:${port}`, 'localhost')
     .addTag('cats')
     .build()
   const documentFactory = () => SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('docs', app, documentFactory)
+  SwaggerModule.setup('docs', app, documentFactory, {
+    jsonDocumentUrl: 'swagger/json',
+  })
 
   await app.listen(port, () => {
+    // biome-ignore lint/suspicious/noConsole: <ignore empty>
+    console.log(``)
     // biome-ignore lint/suspicious/noConsole: <ignore>
     console.log(`🥳 Nest app is running on http://localhost:${port}/api`)
     // biome-ignore lint/suspicious/noConsole: <ignore>
-    console.log(`🥳 Swagger is running on http://localhost:${port}/docs`)
+    console.log(`🤩 Swagger is running on http://localhost:${port}/docs`)
     // biome-ignore lint/suspicious/noConsole: <ignore>
     console.log(`🤓 Current env is ${nodeEnv}`)
   })
