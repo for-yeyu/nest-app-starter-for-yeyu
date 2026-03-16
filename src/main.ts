@@ -2,6 +2,7 @@ import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter } from '@nestjs/platform-fastify'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { Logger } from 'nestjs-pino'
 import { ZodValidationPipe } from 'nestjs-zod'
 import { AppModule } from './app.module'
 import { EnvService } from './config/env/env.service'
@@ -11,7 +12,8 @@ async function bootstrap() {
     logger: ['error', 'warn'],
   })
 
-  app.setGlobalPrefix('api')
+  // TODO: wait v12 https://github.com/nestjs/nest/pull/16102
+  // app.setGlobalPrefix('api/')
   app.useGlobalPipes(new ZodValidationPipe())
 
   const envService = app.get(EnvService)
@@ -30,11 +32,13 @@ async function bootstrap() {
     jsonDocumentUrl: 'swagger/json',
   })
 
+  app.useLogger(app.get(Logger))
+
   await app.listen(port, () => {
     // biome-ignore lint/suspicious/noConsole: <ignore empty>
     console.log(``)
     // biome-ignore lint/suspicious/noConsole: <ignore>
-    console.log(`🥳 Nest app is running on http://localhost:${port}/api`)
+    console.log(`🥳 Nest app is running on http://localhost:${port}/`)
     // biome-ignore lint/suspicious/noConsole: <ignore>
     console.log(`🤩 Swagger is running on http://localhost:${port}/docs`)
     // biome-ignore lint/suspicious/noConsole: <ignore>
