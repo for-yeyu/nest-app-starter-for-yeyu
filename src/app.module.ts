@@ -1,24 +1,18 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import { APP_PIPE } from '@nestjs/core'
 import { LoggerModule } from 'nestjs-pino'
+import { ZodValidationPipe } from 'nestjs-zod'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { envConfig } from './config/env/env.config'
 import { EnvModule } from './config/env/env.module'
-import { validateEnv } from './config/env/env.validation'
-import { pinoHttp } from './config/log/pino-config'
+import { pinoHttp } from './config/log/pino.config'
 import { CatModule } from './module/cat/cat.module'
-
-const nodeEnv = process.env.NodeEnv ?? 'development'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      cache: true,
-      expandVariables: true,
-      envFilePath: [`.env.${nodeEnv}.local`, `.env.${nodeEnv}`, '.env.local', '.env'],
-      validate: validateEnv,
-    }),
+    ConfigModule.forRoot(envConfig),
     LoggerModule.forRoot({
       pinoHttp,
     }),
@@ -26,6 +20,12 @@ const nodeEnv = process.env.NodeEnv ?? 'development'
     CatModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_PIPE,
+      useClass: ZodValidationPipe,
+    },
+  ],
 })
 export class AppModule {}
